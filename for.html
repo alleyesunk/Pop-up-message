@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .msgBox{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 200px;
+            border-radius: 10px;
+            background-color: #eee;
+            padding: 20px;
+        }
+        .msgBox button{
+            background: none;
+            border: none;
+            position: absolute;
+            top: 0;
+            right: 0;
+            color:#aaa;
+        }
+    </style>
+</head>
+<body>
+        <button>点我点我</button>
+    <script>
+        const bth = document.querySelector('button');
+            bth.onclick = function(){
+                displayMessage('嗨！你今天还好嘛');
+            } 
+        function displayMessage(msgText,msgType){
+            //文档对象模型document引用的querySelector()方法返回文档中与指定选择器或选择器组匹配的第一个HTMLEelent对象，无则null
+            const html = document.querySelector('html');
+            //创建元素
+            const panel = document.createElement('div');
+            //给panel元素添加了一个值为mshBox的class类属性。
+            panel.setAttribute('class','msgBox');
+            //给html常量追加了我们设置好样式的panle元素。该方法追加了元素的同时也罢panel<div>元素指定为<html>的子元素。这样做是因为我们创建了一个元素之后这个元素并不会莫名其妙的出现在我们的页面上(浏览器只知道我们创建饿了一个元素，但是不知道把这个元素怎么呈现出来)——因此，我们给这个元素了一个定位，就是现实在html里面
+            html.appendChild(panel);
+
+            const msg = document.createElement('p');
+            msg.textContent = msgText;
+            panel.appendChild(msg);
+
+            const closeBth = document.createElement('button');
+            closeBth.textContent = 'x';
+            panel.appendChild(closeBth);
+
+            closeBth.onclick = function(){
+                panel.parentNode.removeChild(panel)
+            }
+
+        }
+    </script>
+</body>
+</html>
